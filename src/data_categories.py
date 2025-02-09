@@ -6,3 +6,4 @@ categorical_columns = [
                 'lunch',
                 'test_preparation_course'
             ]
+target_column_name = 'math_score'

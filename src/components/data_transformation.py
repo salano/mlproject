@@ -11,7 +11,11 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.exception import CustomException
 from src.logger import logging
-from src.data_categories import numerical_columns, categorical_columns
+from src.data_categories import (
+    numerical_columns, 
+    categorical_columns, 
+    target_column_name
+    )
 from src.utils import save_object
 
 @dataclass
@@ -80,7 +84,6 @@ class DataTransformation:
             logging.info('Initialize preprocessor object')
             preprocessor_obj = self.get_data_transformation_object()
 
-            target_column_name = 'math_score'
 
             input_train_features_df = train_df.drop(columns=[target_column_name], axis=1)
             target_train_feature_df = train_df[target_column_name]
