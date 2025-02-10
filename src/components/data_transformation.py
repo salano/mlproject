@@ -14,7 +14,8 @@ from src.logger import logging
 from src.data_categories import (
     numerical_columns, 
     categorical_columns, 
-    target_column_name
+    target_column_name,
+    removed_columns
     )
 from src.utils import save_object
 
@@ -84,11 +85,10 @@ class DataTransformation:
             logging.info('Initialize preprocessor object')
             preprocessor_obj = self.get_data_transformation_object()
 
-
-            input_train_features_df = train_df.drop(columns=[target_column_name], axis=1)
+            input_train_features_df = train_df.drop(columns=removed_columns, axis=1)
             target_train_feature_df = train_df[target_column_name]
 
-            input_test_features_df = test_df.drop(columns=[target_column_name], axis=1)
+            input_test_features_df = test_df.drop(columns=removed_columns, axis=1)
             target_test_feature_df = test_df[target_column_name]
 
             logging.info(

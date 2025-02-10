@@ -7,3 +7,4 @@ categorical_columns = [
                 'test_preparation_course'
             ]
 target_column_name = 'math_score'
+removed_columns = ['math_score']
