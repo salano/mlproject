@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 from dataclasses import dataclass
 
 from sklearn.metrics import r2_score
@@ -88,6 +89,11 @@ class ModelTrainer:
             )
 
             predicted = best_model.predict(X_test)
+
+            pred_df=pd.DataFrame({'Actual Value': 
+                                  Y_test, 'Predicted Value': predicted,
+                                  'Difference': Y_test-predicted})
+            print(pred_df)
 
             r2_square = r2_score(Y_test, predicted)
 
