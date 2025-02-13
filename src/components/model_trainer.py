@@ -10,7 +10,12 @@ from sklearn.ensemble import (
     RandomForestRegressor
 )
 
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import (
+    LinearRegression,
+    Ridge, 
+    ElasticNet, 
+    Lasso
+)
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
@@ -51,6 +56,9 @@ class ModelTrainer:
                 'XGBClassifier ': XGBRegressor(),
                 'CatBoosting Classifier': CatBoostRegressor(verbose=False),
                 'ADABoost Classifier': AdaBoostRegressor(),
+                'Ridge Regression': Ridge(),
+                'Lasso Regression' : Lasso(),
+                'ElasticNet Regression': ElasticNet()
             }
 
 

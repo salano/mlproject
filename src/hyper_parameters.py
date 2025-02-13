@@ -1,3 +1,5 @@
+import numpy as np
+
 params={
             "Decision Tree": {
                 'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
@@ -32,6 +34,16 @@ params={
                 'learning_rate':[.1,.01,0.5,.001],
                 # 'loss':['linear','square','exponential'],
                 'n_estimators': [8,16,32,64,128,256]
+            },
+            "Lasso Regression":{
+                'alpha': np.arange(0.00, 1.0, 0.01)
+            },
+            "Ridge Regression":{
+                'alpha':[1e-15,1e-10,1e-8,1e-3,1e-2,1,5,10,20,30,35,40,45,50,55,100]
+            },
+            "ElasticNet Regression":{
+                'alpha': [0.1, 1.0, 10.0],
+                'l1_ratio': [0.2, 0.5, 0.8]
             }
                 
         }

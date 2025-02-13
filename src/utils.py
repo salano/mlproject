@@ -35,7 +35,7 @@ def evaluate_model(x_train, y_train, x_test, y_test, models, param):
             #Hyperparameter
             para = param[list(models.keys())[i]]
 
-            gs = GridSearchCV(model, para, cv=3)
+            gs = GridSearchCV(model, para, cv=5)
             gs.fit(x_train, y_train)
 
             model.set_params(**gs.best_params_)
