@@ -51,9 +51,22 @@ class DataIngestion:
 if __name__ == "__main__":
     obj =  DataIngestion()
     train_data, test_data = obj.initiate_data_ingestion()
+    tgt_column_name = 'math_score'
+    r_columns = ['math_score']
+
+    #dynamic categorization
+    train_df = pd.read_csv(train_data)
+    num_columns = train_df.select_dtypes(exclude="object").columns.tolist()
+    cat_columns = train_df.select_dtypes(include="object").columns.tolist()
+    num_columns.remove(tgt_column_name)
 
     data_transformation = DataTransformation()
-    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+    data_transformation.get_data_transformation_object(numerical_columns=num_columns, categorical_columns=cat_columns)
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(
+        train_data, test_data, 
+        numerical_columns=num_columns, categorical_columns=cat_columns,
+        target_column_name=tgt_column_name, removed_columns=r_columns
+        )
 
     model_trainer = ModelTrainer()
     print(model_trainer.initiate_model_trainer(train_arr,test_arr))

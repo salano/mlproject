@@ -11,12 +11,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.exception import CustomException
 from src.logger import logging
-from src.data_categories import (
-    numerical_columns, 
-    categorical_columns, 
-    target_column_name,
-    removed_columns
-    )
+
 from src.utils import save_object
 
 @dataclass
@@ -28,7 +23,7 @@ class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
 
-    def get_data_transformation_object(self):
+    def get_data_transformation_object(self, numerical_columns, categorical_columns):
         '''
         This function is responsible for the transformation of the numerical and categorical values in the dataset
         '''
@@ -75,7 +70,11 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e, sys)
         
-    def initiate_data_transformation(self, train_path, test_path):
+    def initiate_data_transformation(self, train_path, test_path, 
+                                     numerical_columns, 
+                                        categorical_columns, 
+                                        target_column_name,
+                                        removed_columns):
         try:
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
@@ -83,7 +82,7 @@ class DataTransformation:
             logging.info('Train and test datasets loaded')
 
             logging.info('Initialize preprocessor object')
-            preprocessor_obj = self.get_data_transformation_object()
+            preprocessor_obj = self.get_data_transformation_object(numerical_columns, categorical_columns)
 
             input_train_features_df = train_df.drop(columns=removed_columns, axis=1)
             target_train_feature_df = train_df[target_column_name]
