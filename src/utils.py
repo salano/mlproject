@@ -31,7 +31,7 @@ def evaluate_model(x_train, y_train, x_test, y_test, models, param):
             model = list(models.values())[i]
 
             logging.info("Train model [{}]".format(list(models.keys())[i]))
-
+            print(list(models.keys())[i],'\n')
             #Hyperparameter
             para = param[list(models.keys())[i]]
 
@@ -44,6 +44,12 @@ def evaluate_model(x_train, y_train, x_test, y_test, models, param):
 
             y_train_predict = model.predict(x_train)
             y_test_predict = model.predict(x_test)
+
+            '''
+            coefficient of determination - explains how well the independent variables
+            explain the variability of the independent variable.
+            High R2 suggests dependednt variable is hightly correlated with independent variables (Multicollinearity)
+            '''
 
             train_model_r2_score = r2_score(y_train, y_train_predict)
             test_model_r2_score = r2_score(y_test, y_test_predict)
@@ -67,14 +73,14 @@ def evaluate_model(x_train, y_train, x_test, y_test, models, param):
             print('Model performance for Test set')
             print("- Root Mean Squared Error: {:.4f}".format(test_model_rmse_score))
             print("- Mean Absolute Error: {:.4f}".format(test_model_mse_score))
-            print("- R2 Score: {:.4f}".format(test_model_r2_score))
+            print("- R2 Score: {:.4f} \n".format(test_model_r2_score))
 
 
             report[list(models.keys())[i]] = test_model_r2_score
 
-            print(pd.DataFrame(report.items(), columns=['Model Name', 'R2_Score']).sort_values(by=["R2_Score"],ascending=False))
+        print(pd.DataFrame(report.items(), columns=['Model Name', 'R2_Score']).sort_values(by=["R2_Score"],ascending=False))
 
-            return report
+        return report
             
     except Exception as e:
         raise CustomException(e, sys)

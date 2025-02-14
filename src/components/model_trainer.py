@@ -52,13 +52,12 @@ class ModelTrainer:
                 'Decision Tree': DecisionTreeRegressor(),
                 'Gradient Boosting': GradientBoostingRegressor(),
                 'Linear Regression': LinearRegression(),
-                'Random Forest': RandomForestRegressor(),
-                'K-Neighbors Classifier': KNeighborsRegressor(),
-                'XGBClassifier ': XGBRegressor(),
-                'CatBoosting Classifier': CatBoostRegressor(verbose=False),
-                'ADABoost Classifier': AdaBoostRegressor(),
+                'K-Neighbors Regression': KNeighborsRegressor(),
+                'XGBRegressor': XGBRegressor(),
+                'CatBoosting Regression': CatBoostRegressor(verbose=False),
+                'ADABoost Regression': AdaBoostRegressor(),
                 'Ridge Regression': Ridge(),
-                'Lasso Regression' : Lasso(),
+                'Lasso Regression' : Lasso(random_state=1, tol=1e-7, max_iter=20000),
                 'ElasticNet Regression': ElasticNet()
             }
 
